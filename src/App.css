@@ -2,20 +2,8 @@
     width: 100%;
     min-height: 100vh;
     background-color: #242629;
-}
-
-.App-header {
+    /* justify-content: center; */
+    align-items: center;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
-    text-align: center;
-}
-
-.App-title {
-    font-size: 2.5rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
 }
