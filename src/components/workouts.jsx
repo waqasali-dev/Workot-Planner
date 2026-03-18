@@ -165,8 +165,8 @@ let workouts = [
     { id: 150, name: "Atlas Stone Lifts", reps: 5, sets: 3, category: "legs", level: "expert" }
 ];
 
-export default function Workouts({ level }) {
-    const filteredWorkouts = workouts.filter((workout) => workout.level === level);
+export default function Workouts({ level, type1, type2 }) {
+    const filteredWorkouts = workouts.filter((workout) => workout.level === level && (workout.category === type1 || workout.category === type2));
     return (
         <div className='workouts'>
             {filteredWorkouts.map((workout) => (
@@ -174,7 +174,7 @@ export default function Workouts({ level }) {
                     <h1>{workout.name}</h1>
                     <p>Reps: {workout.reps}</p>
                     <p>Sets: {workout.sets}</p>
-                    {/* <p>Category: {workout.category}</p> */}
+                    <p>Category: {workout.category}</p>
                 </div>
             ))}
         </div>
