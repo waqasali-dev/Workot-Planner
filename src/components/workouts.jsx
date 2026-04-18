@@ -165,8 +165,8 @@ let workouts = [
     { id: 150, name: "Atlas Stone Lifts", reps: 5, sets: 3, category: "legs", level: "expert" }
 ];
 
-export default function Workouts({ level, type1, type2 }) {
-    const filteredWorkouts = workouts.filter((workout) => workout.level === level && (workout.category === type1 || workout.category === type2));
+export default function Workouts({ level, type1, setSelectedWorkouts, day }) {
+    const filteredWorkouts = workouts.filter((workout) => workout.level === level && (workout.category === type1));
     return (
         <div className='workouts'>
             {filteredWorkouts.map((workout) => (
@@ -175,6 +175,7 @@ export default function Workouts({ level, type1, type2 }) {
                     <p>Reps: {workout.reps}</p>
                     <p>Sets: {workout.sets}</p>
                     <p>Category: {workout.category}</p>
+                    <button onClick={() => setSelectedWorkouts((prev) => ({ ...prev, [day]: { workouts: [...prev[day].workouts, workout] } }))}>Add to Plan</button>
                 </div>
             ))}
         </div>

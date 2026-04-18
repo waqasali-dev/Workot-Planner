@@ -4,15 +4,47 @@ import Exercisetype from './Exercisetype';
 import './Maininterface.css';
 
 
-function MainInterface({ level }) {
+function MainInterface() {
+    const level = localStorage.getItem('level') || 'beginner';
     const [day, setDay] = useState('monday');
     const [type1, setType1] = useState('abs');
     const [type2, setType2] = useState('');
     const [dualMuscle, setDualMuscle] = useState(false);
-    console.log(day);
+    const [selectedWorkouts, setSelectedWorkouts] = useState({
+        monday: {
+            type: [],
+            workouts: [],
+        },
+        tuesday: {
+            type: [],
+            workouts: [],
+        },
+        wednesday: {
+            type: [],
+            workouts: [],
+        },
+        thursday: {
+            type: [],
+            workouts: [],
+        },
+        friday: {
+            type: [],
+            workouts: [],
+        },
+        saturday: {
+            type: [],
+            workouts: [],
+        },
+        sunday: {
+            type: [],
+            workouts: [],
+        },
+    });
     const exerciseTypes = ['abs', 'chest', 'back', 'legs', 'arms', 'shoulders', 'cardio'];
     return (
         <div className='main-interface'>
+            {/* this is prompt section, whatever written here is what the user wants now: 
+            */}
             <div className='plan-panel'>
                 <p className='day-selector'>
                     Day:
@@ -27,14 +59,22 @@ function MainInterface({ level }) {
                     </select>
                 </p>
                 <div className='workout-type'>
-                    <p>Dual Muscle Group <span className='dual-muscle-group'><input type="checkbox" checked={dualMuscle} onChange={() => {
-                        if (dualMuscle) {
-                            setDualMuscle(false);
-                            setType2('');
-                        } else {
-                            setDualMuscle(true);
-                        }
-                    }} /></span></p>
+                    <p>Dual Muscle Group :
+                        <span className='dual-muscle-group'>
+                            <input
+                                type="checkbox"
+                                checked={dualMuscle}
+                                onChange={() => {
+                                    if (dualMuscle) {
+                                        setDualMuscle(false);
+                                        setType2('');
+                                    } else {
+                                        setDualMuscle(true);
+                                    }
+                                }}
+                            />
+                        </span>
+                    </p>
 
                     <p className='type-1'>
                         <Exercisetype
@@ -42,7 +82,16 @@ function MainInterface({ level }) {
                             type={exerciseTypes}
                             setType={setType1}
                             postselected={[type2]}
-                            onChange={(e) => setType1(e.target.value)}
+                            onChange={(e) => {
+                                setType1(e.target.value)
+                                setSelectedWorkouts((prev) => ({
+                                    ...prev,
+                                    [day]: {
+                                        ...prev[day],
+                                        type: [e.target.value],
+                                    },
+                                }))
+                            }}
                         />
                     </p>
 
@@ -53,13 +102,48 @@ function MainInterface({ level }) {
                                 type={exerciseTypes}
                                 setType={setType2}
                                 postselected={[type1]}
+                                onChange={(e) => {
+                                    setType2(e.target.value)
+                                    setSelectedWorkouts((prev) => ({
+                                        ...prev,
+                                        [day]: {
+                                            ...prev[day],
+                                            type: [type1, e.target.value],
+                                        },
+                                    }))
+                                }}
                             />
                         </p>
                     )}
                 </div>
             </div>
             <div className='workout-list'>
-                <Workouts level={level} type1={type1} type2={type2} />
+                <Workouts
+                    level={level}
+                    type1={type1}
+                    day={day}
+                    setSelectedWorkouts={setSelectedWorkouts}
+                />
+                {
+                    dualMuscle && (
+                        <Workouts
+                            level={level}
+                            type1={type2}
+                            day={day}
+                            setSelectedWorkouts={setSelectedWorkouts}
+                        />
+                    )
+                }
+            </div>
+            <div className='workout-plan'>
+                {selectedWorkouts[day].workouts.map((workout) => (
+                    <div key={workout.id}>
+                        <h2>{workout.name}</h2>
+                        <p>Reps: {workout.reps}</p>
+                        <p>Sets: {workout.sets}</p>
+                        <p>Category: {workout.category}</p>
+                    </div>
+                ))}
             </div>
         </div>
     )
