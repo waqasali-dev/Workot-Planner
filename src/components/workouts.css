@@ -1,26 +1,88 @@
+/* workouts.css */
+
 .workouts {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    width: 100%;
-    height: 100%;
-    justify-content: center;
-    align-items: stretch;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+}
+
+@media (min-width: 720px) {
+    .workouts {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 1200px) {
+    .workouts {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
 }
 
 .workout {
+    background: var(--surface-lowest);
+    border: 1px solid var(--outline-variant);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    padding: 18px;
+
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    width: 20%;
-    min-width: 200px;
-    min-height: 300px;
-    height: auto;
-    background-color: #8fa9cf;
-    border-radius: 10px;
-    border: 1px solid #909fb6;
-    color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    gap: 8px;
+
+    transition: transform 180ms ease, box-shadow 220ms ease, border-color 220ms ease;
+}
+
+.workout:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    border-color: color-mix(in srgb, var(--primary) 55%, var(--outline-variant));
+}
+
+.workout h1 {
+    margin: 0 0 2px;
+    font-size: 16px;
+    font-weight: 850;
+    letter-spacing: -0.01em;
+}
+
+.workout p {
+    margin: 0;
+    color: var(--on-surface-variant);
+    font-size: 13px;
+    font-weight: 550;
+}
+
+/* CTA button styled like primary action */
+.workout button {
+    margin-top: 10px;
+    width: 100%;
+    border: 1px solid color-mix(in srgb, var(--primary) 35%, transparent);
+    background: var(--primary);
+    color: var(--on-primary);
+    border-radius: 12px;
+    padding: 10px 12px;
+
+    font-weight: 800;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+    margin-top: auto;
+
+    box-shadow: 0 10px 22px rgba(0, 109, 47, 0.18);
+    transition: transform 140ms ease, filter 180ms ease, box-shadow 180ms ease;
+}
+
+.workout button:hover {
+    filter: brightness(1.02);
+    box-shadow: 0 14px 30px rgba(0, 109, 47, 0.22);
+}
+
+.workout button:active {
+    transform: scale(0.985);
+}
+
+.workout button:focus {
+    outline: none;
+    box-shadow:
+        0 14px 30px rgba(0, 109, 47, 0.22),
+        0 0 0 4px color-mix(in srgb, var(--primary) 18%, transparent);
 }

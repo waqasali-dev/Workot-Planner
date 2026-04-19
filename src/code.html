@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Levels - Workout Planner</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container": "#e8f0e3",
+                        "tertiary-container": "#ff877e",
+                        "primary-container": "#00c45a",
+                        "error-container": "#ffdad6",
+                        "on-primary-fixed": "#002109",
+                        "secondary-fixed": "#dee0ff",
+                        "on-error": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#f3fcef",
+                        "primary-fixed-dim": "#1be46c",
+                        "inverse-primary": "#1be46c",
+                        "on-primary": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-container": "#414b83",
+                        "on-error-container": "#93000a",
+                        "background": "#f3fcef",
+                        "inverse-on-surface": "#ebf3e6",
+                        "surface-container-high": "#e2ebde",
+                        "error": "#ba1a1a",
+                        "tertiary": "#ae2f2d",
+                        "on-primary-fixed-variant": "#005322",
+                        "on-tertiary-fixed-variant": "#8c1618",
+                        "surface-tint": "#006d2f",
+                        "outline-variant": "#bccbb8",
+                        "on-secondary-fixed-variant": "#39437a",
+                        "on-surface": "#161d16",
+                        "tertiary-fixed": "#ffdad6",
+                        "on-background": "#161d16",
+                        "secondary-container": "#b3bdfe",
+                        "outline": "#6d7b6b",
+                        "on-secondary": "#ffffff",
+                        "surface-container-highest": "#dce5d8",
+                        "primary-fixed": "#66ff8e",
+                        "on-secondary-fixed": "#09154d",
+                        "secondary-fixed-dim": "#bac3ff",
+                        "secondary": "#515a94",
+                        "surface": "#f3fcef",
+                        "on-surface-variant": "#3d4a3c",
+                        "inverse-surface": "#2b322a",
+                        "on-tertiary-container": "#800a11",
+                        "on-tertiary-fixed": "#410003",
+                        "surface-variant": "#dce5d8",
+                        "primary": "#006d2f",
+                        "tertiary-fixed-dim": "#ffb3ac",
+                        "surface-container-low": "#eef6e9",
+                        "on-primary-container": "#00491d",
+                        "surface-dim": "#d4ddd0"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body min-h-screen flex flex-col antialiased">
+<!-- TopNavBar (Linear intent: Setup/Selection -> Navigation hidden, but Header shown as requested) -->
+<header class="w-full h-16 px-6 lg:px-12 flex justify-center items-center sticky top-0 z-50 bg-background/80 backdrop-blur-md">
+<h1 class="text-2xl font-black tracking-tight text-on-background font-headline">Workout Planner</h1>
+</header>
+<!-- Main Content -->
+<main class="flex-grow flex flex-col items-center justify-center px-6 py-12 md:py-24">
+<div class="max-w-4xl w-full flex flex-col items-center text-center mb-16">
+<h2 class="text-4xl md:text-5xl font-extrabold text-on-background font-headline mb-4 tracking-tight">Select Your Experience Level</h2>
+<p class="text-lg md:text-xl text-on-surface-variant max-w-2xl">Choose the path that best matches your current fitness journey to get a personalized workout plan.</p>
+</div>
+<!-- Levels Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl w-full">
+<!-- Beginner Card -->
+<button class="group relative flex flex-col items-start p-8 rounded-xl bg-surface-container-lowest border border-outline-variant shadow-sm hover:shadow-lg hover:border-primary transition-all duration-300 text-left active:scale-[0.98]">
+<div class="w-14 h-14 rounded-full bg-surface-container flex items-center justify-center mb-6 group-hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined text-primary group-hover:text-on-primary-container transition-colors text-3xl">directions_walk</span>
+</div>
+<h3 class="text-2xl font-bold text-on-background font-headline mb-3 group-hover:text-primary transition-colors">Beginner</h3>
+<p class="text-on-surface-variant text-sm flex-grow mb-6">New to working out or returning after a long break. Focuses on fundamentals and building a base.</p>
+<div class="flex items-center text-primary font-semibold text-sm group-hover:gap-2 transition-all">
+<span>Select Level</span>
+<span class="material-symbols-outlined text-lg ml-1">arrow_forward</span>
+</div>
+</button>
+<!-- Intermediate Card -->
+<button class="group relative flex flex-col items-start p-8 rounded-xl bg-surface-container-lowest border border-outline-variant shadow-sm hover:shadow-lg hover:border-primary transition-all duration-300 text-left active:scale-[0.98]">
+<!-- Recommended Badge -->
+<div class="absolute -top-3 right-6 bg-primary text-on-primary text-xs font-bold px-3 py-1 rounded-full shadow-sm">Popular</div>
+<div class="w-14 h-14 rounded-full bg-surface-container flex items-center justify-center mb-6 group-hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined text-primary group-hover:text-on-primary-container transition-colors text-3xl">fitness_center</span>
+</div>
+<h3 class="text-2xl font-bold text-on-background font-headline mb-3 group-hover:text-primary transition-colors">Intermediate</h3>
+<p class="text-on-surface-variant text-sm flex-grow mb-6">Familiar with gym equipment and basic routines. Looking to push harder and refine technique.</p>
+<div class="flex items-center text-primary font-semibold text-sm group-hover:gap-2 transition-all">
+<span>Select Level</span>
+<span class="material-symbols-outlined text-lg ml-1">arrow_forward</span>
+</div>
+</button>
+<!-- Expert Card -->
+<button class="group relative flex flex-col items-start p-8 rounded-xl bg-surface-container-lowest border border-outline-variant shadow-sm hover:shadow-lg hover:border-primary transition-all duration-300 text-left active:scale-[0.98]">
+<div class="w-14 h-14 rounded-full bg-surface-container flex items-center justify-center mb-6 group-hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined text-primary group-hover:text-on-primary-container transition-colors text-3xl">local_fire_department</span>
+</div>
+<h3 class="text-2xl font-bold text-on-background font-headline mb-3 group-hover:text-primary transition-colors">Expert</h3>
+<p class="text-on-surface-variant text-sm flex-grow mb-6">Advanced lifter with consistent training history. Requires complex programming and high intensity.</p>
+<div class="flex items-center text-primary font-semibold text-sm group-hover:gap-2 transition-all">
+<span>Select Level</span>
+<span class="material-symbols-outlined text-lg ml-1">arrow_forward</span>
+</div>
+</button>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-8 mt-auto flex flex-col md:flex-row justify-between items-center px-6 lg:px-12 gap-4 bg-surface-container-low text-xs font-body border-t border-outline-variant/30">
+<div class="font-bold text-on-background">© 2024 Workout Planner. Elevate your strength.</div>
+<div class="flex gap-6">
+<a class="text-on-surface-variant hover:text-primary underline underline-offset-4 opacity-80 hover:opacity-100 transition-opacity" href="#">Privacy</a>
+<a class="text-on-surface-variant hover:text-primary underline underline-offset-4 opacity-80 hover:opacity-100 transition-opacity" href="#">Terms</a>
+<a class="text-on-surface-variant hover:text-primary underline underline-offset-4 opacity-80 hover:opacity-100 transition-opacity" href="#">Support</a>
+</div>
+</footer>
+</body></html>

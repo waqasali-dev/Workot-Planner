@@ -40,6 +40,15 @@ function MainInterface() {
             workouts: [],
         },
     });
+    let planChecker = {
+        monday: false,
+        tuesday: false,
+        wednesday: false,
+        thursday: false,
+        friday: false,
+        saturday: false,
+        sunday: false,
+    }
     const exerciseTypes = ['abs', 'chest', 'back', 'legs', 'arms', 'shoulders', 'cardio'];
     return (
         <div className='main-interface'>
@@ -48,7 +57,9 @@ function MainInterface() {
             <div className='plan-panel'>
                 <p className='day-selector'>
                     Day:
-                    <select className='day-dropdown' onChange={(e) => setDay(e.target.value)}>
+                    <select className='day-dropdown' onChange={(e) => {
+                        setDay(e.target.value)
+                    }}>
                         <option value="monday">Monday</option>
                         <option value="tuesday">Tuesday</option>
                         <option value="wednesday">Wednesday</option>
@@ -68,6 +79,16 @@ function MainInterface() {
                                     if (dualMuscle) {
                                         setDualMuscle(false);
                                         setType2('');
+                                        if (planChecker[day]) {
+                                            setSelectedWorkouts((prev) => ({
+                                                ...prev,
+                                                [day]: {
+                                                    ...prev[day],
+                                                    type: [],
+                                                    workouts: [],
+                                                },
+                                            }))
+                                        }
                                     } else {
                                         setDualMuscle(true);
                                     }
@@ -122,6 +143,7 @@ function MainInterface() {
                     level={level}
                     type1={type1}
                     day={day}
+                    planChecker={planChecker[day]}
                     setSelectedWorkouts={setSelectedWorkouts}
                 />
                 {
@@ -130,14 +152,30 @@ function MainInterface() {
                             level={level}
                             type1={type2}
                             day={day}
+                            planChecker={planChecker[day]}
                             setSelectedWorkouts={setSelectedWorkouts}
                         />
                     )
                 }
             </div>
             <div className='workout-plan'>
+
                 {selectedWorkouts[day].workouts.map((workout) => (
-                    <div key={workout.id}>
+                    <div
+                        className="Workout-card"
+                        key={workout.id}>
+                        {/* let's add cross sign to remove workouts*/}
+                        <span
+                            className="cross-sign"
+                            onClick={() => {
+                                setSelectedWorkouts((prev) => ({
+                                    ...prev,
+                                    [day]: {
+                                        ...prev[day],
+                                        workouts: prev[day].workouts.filter((w) => w.id !== workout.id),
+                                    },
+                                }))
+                            }}>✕</span>
                         <h2>{workout.name}</h2>
                         <p>Reps: {workout.reps}</p>
                         <p>Sets: {workout.sets}</p>

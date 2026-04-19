@@ -1,3 +1,204 @@
+/* Maininterface.css */
+
+.main-interface {
+    width: 100%;
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 28px 24px 64px;
+
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 22px;
+}
+
+@media (min-width: 1000px) {
+    .main-interface {
+        grid-template-columns: 340px 1fr;
+        align-items: start;
+        gap: 28px;
+        padding-top: 40px;
+    }
+}
+
+/* Left panel (prompt/setup) */
 .plan-panel {
+    background: var(--surface-lowest);
+    border: 1px solid var(--outline-variant);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    padding: 22px;
+}
+
+.day-selector {
+    margin: 0 0 14px;
+    color: var(--on-surface-variant);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.day-dropdown {
+    width: 180px;
+    max-width: 100%;
+    border-radius: 10px;
+    border: 1px solid var(--outline-variant);
+    background: var(--surface-low);
+    color: var(--on-background);
+    padding: 10px 40px 10px 12px;
+
+    /* custom dropdown arrow */
+    appearance: none;
+    background-image:
+        linear-gradient(45deg, transparent 50%, var(--outline) 50%),
+        linear-gradient(135deg, var(--outline) 50%, transparent 50%);
+    background-position:
+        calc(100% - 18px) 50%,
+        calc(100% - 12px) 50%;
+    background-size: 6px 6px, 6px 6px;
+    background-repeat: no-repeat;
+
+    transition: border-color 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+}
+
+.day-dropdown:hover {
+    border-color: color-mix(in srgb, var(--primary) 45%, var(--outline-variant));
+}
+
+.day-dropdown:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--primary) 18%, transparent);
+}
+
+/* Workout type block */
+.workout-type {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid color-mix(in srgb, var(--outline-variant) 40%, transparent);
+}
+
+.workout-type>p {
+    margin: 0 0 12px;
+    color: var(--on-background);
+    font-weight: 650;
+}
+
+/* checkbox wrapper */
+.dual-muscle-group {
+    display: inline-flex;
+    margin-left: 10px;
+    transform: translateY(2px);
+}
+
+.dual-muscle-group input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--primary);
+    cursor: pointer;
+}
+
+/* The Exercisetype component likely renders a <select>.
+   Style selects inside these blocks without changing markup. */
+.type-1 select,
+.type-2 select {
+    width: 100%;
+    border-radius: 10px;
+    border: 1px solid var(--outline-variant);
+    background: var(--surface-low);
+    color: var(--on-background);
+    padding: 10px 40px 10px 12px;
+
+    appearance: none;
+    background-image:
+        linear-gradient(45deg, transparent 50%, var(--outline) 50%),
+        linear-gradient(135deg, var(--outline) 50%, transparent 50%);
+    background-position:
+        calc(100% - 18px) 50%,
+        calc(100% - 12px) 50%;
+    background-size: 6px 6px, 6px 6px;
+    background-repeat: no-repeat;
+
+    transition: border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.type-1 select:focus,
+.type-2 select:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--primary) 18%, transparent);
+}
+
+/* Right side layout */
+.workout-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+}
+
+/* Selected plan section */
+.workout-plan {
+    margin-top: 6px;
+    background: var(--surface-lowest);
+    border: 1px solid var(--outline-variant);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    padding: 18px;
+    width: var(--container);
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.workout-plan>div {
+    width: 44%;
+    padding: 14px 12px;
+    border-radius: 10px;
+    background: var(--surface-low);
+    border: 1px solid color-mix(in srgb, var(--outline-variant) 40%, transparent);
+}
+
+.workout-plan>div+div {
+    margin-top: 12px;
+}
+
+.workout-plan h2 {
+    margin: 0 0 6px;
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+}
+
+.workout-plan p {
+    margin: 4px 0 0;
+    color: var(--on-surface-variant);
+    font-size: 13px;
+    font-weight: 550;
+}
+
+.Workout-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.cross-sign {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    top: 4px;
+    right: 4px;
+    margin-left: 20px;
+    border-radius: 50%;
+    background-color: red;
     color: white;
+    width: 18px;
+    height: 18px;
+    font-weight: 200;
+    font-size: 14px;
+    align-self: flex-end;
 }

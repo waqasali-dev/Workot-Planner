@@ -1,48 +1,90 @@
+/* levels.css */
+
 .levels {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
     width: 100%;
-    height: 100%;
-}
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 48px 24px 64px;
 
-.level {
-    display: flex;
-    align-self: center;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
     align-items: center;
-    height: 60px;
-    width: 25%;
-    max-width: 300px;
-    min-width: 240px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin: 10px;
-    color: #000;
-    font-size: 20px;
-    font-weight: bold;
-    text-decoration: none;
-    list-style: none;
-    border: 1px solid #ccc;
-    border-radius: 15px;
-    background-color: rgb(148, 105, 105);
-    color: white;
-    padding: 10px;
+
+    /* center similar to inspiration */
+    flex: 1;
 }
 
+@media (min-width: 900px) {
+    .levels {
+        padding-top: 72px;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 28px;
+    }
+}
 
+/* Card-like link inspired by the level cards */
+.level {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 18px;
+    height: 200px;
 
-/* but there is a purple line under the text, let's remove it */
-.level-text {
-    text-decoration: none;
-    color: white;
+    padding: 28px;
+    border-radius: var(--radius);
+
+    background: var(--surface-lowest);
+    border: 1px solid var(--outline-variant);
+    box-shadow: var(--shadow-sm);
+
+    transition: transform 180ms ease, box-shadow 220ms ease, border-color 220ms ease;
+    will-change: transform;
 }
 
 .level:hover {
-    background-color: rgb(158, 75, 75);
-    color: white;
-    transform: scale(1.1);
-    cursor: pointer;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    border-color: color-mix(in srgb, var(--primary) 55%, var(--outline-variant));
+}
+
+.level:active {
+    transform: scale(0.985);
+}
+
+/* Typography inside each level */
+.level h1 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+}
+
+/* Add a subtle "Select Level →" affordance without changing markup */
+.level>div {
+    width: 100%;
+}
+
+.level>div::after {
+    content: "Select Level";
+    display: inline-block;
+    margin-top: 14px;
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.01em;
+}
+
+.level::after {
+    content: "→";
+    color: var(--primary);
+    font-weight: 800;
+    align-self: flex-end;
+    margin-left: auto;
+    transition: transform 200ms ease;
+}
+
+.level:hover::after {
+    transform: translateX(4px);
 }
