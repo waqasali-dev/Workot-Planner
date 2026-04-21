@@ -3,43 +3,18 @@ import Workouts from './workouts';
 import Exercisetype from './Exercisetype';
 import './Maininterface.css';
 import Sidebar from './Sidebar';
+import { useWorkout } from './context/WorkoutContext';
+
+
 
 function MainInterface() {
+    const { selectedWorkouts, setSelectedWorkouts } = useWorkout();
     const level = localStorage.getItem('level') || 'beginner';
     const [day, setDay] = useState('monday');
     const [type1, setType1] = useState('abs');
     const [type2, setType2] = useState('');
     const [dualMuscle, setDualMuscle] = useState(false);
-    const [selectedWorkouts, setSelectedWorkouts] = useState({
-        monday: {
-            type: [],
-            workouts: [],
-        },
-        tuesday: {
-            type: [],
-            workouts: [],
-        },
-        wednesday: {
-            type: [],
-            workouts: [],
-        },
-        thursday: {
-            type: [],
-            workouts: [],
-        },
-        friday: {
-            type: [],
-            workouts: [],
-        },
-        saturday: {
-            type: [],
-            workouts: [],
-        },
-        sunday: {
-            type: [],
-            workouts: [],
-        },
-    });
+
     const [planChecker, setPlanChecker] = useState({
         monday: false,
         tuesday: false,
@@ -162,33 +137,43 @@ function MainInterface() {
                 }
             </div>
             <div className='workout-plan'>
-
-                {selectedWorkouts[day].workouts.map((workout) => (
-                    <div
-                        className="Workout-card"
-                        key={workout.id}>
-                        {/* let's add cross sign to remove workouts*/}
-                        <span
-                            className="cross-sign"
-                            onClick={() => {
-                                setSelectedWorkouts((prev) => ({
-                                    ...prev,
-                                    [day]: {
-                                        ...prev[day],
-                                        workouts: prev[day].workouts.filter((w) => w.id !== workout.id),
-                                    },
-                                }))
-                            }}>✕</span>
-                        <h2>{workout.name}</h2>
-                        <p>Reps: {workout.reps}</p>
-                        <p>Sets: {workout.sets}</p>
-                        <p>Category: {workout.category}</p>
-                    </div>
-                ))}
+                {selectedWorkouts[day].workouts.length === 0 && (
+                    <p>No workouts selected</p>
+                )}
+                <div className='workout-card-wrapper'>
+                    {selectedWorkouts[day].workouts.map((workout) => (
+                        <div
+                            className="Workout-card"
+                            key={workout.id}>
+                            {/* let's add cross sign to remove workouts*/}
+                            <span
+                                className="cross-sign"
+                                onClick={() => {
+                                    setSelectedWorkouts((prev) => ({
+                                        ...prev,
+                                        [day]: {
+                                            ...prev[day],
+                                            workouts: prev[day].workouts.filter((w) => w.id !== workout.id),
+                                        },
+                                    }))
+                                }}>✕</span>
+                            <h2>{workout.name}</h2>
+                            <p>Reps: {workout.reps}</p>
+                            <p>Sets: {workout.sets}</p>
+                            <p>Category: {workout.category}</p>
+                        </div>
+                    ))}
+                </div>
+                <button className='done-button' onClick={() => {
+                    setDay('monday');
+                    setType1('abs');
+                    setType2('');
+                    setDualMuscle(false)
+                }}>Done</button>
             </div>
         </div>
     )
 }
 
-export default MainInterface
+export default MainInterface;
 

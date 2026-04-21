@@ -27,6 +27,9 @@
     border-radius: var(--radius);
     box-shadow: var(--shadow-sm);
     padding: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
 .day-selector {
@@ -147,14 +150,14 @@
     padding: 18px;
     width: var(--container);
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     gap: 12px;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
 }
 
-.workout-plan>div {
+.workout-plan>div>div {
     width: 44%;
     padding: 14px 12px;
     border-radius: 10px;
@@ -181,6 +184,7 @@
 }
 
 .Workout-card {
+    width: 44%;
     display: flex;
     flex-direction: column;
 }
@@ -201,4 +205,33 @@
     font-weight: 200;
     font-size: 14px;
     align-self: flex-end;
+}
+
+.workout-card-wrapper {
+    display: flex;
+    width: 90%;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+
+
+.done-button {
+    width: 160px;
+    align-self: center;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: none;
+    background: var(--primary);
+    color: var(--on-primary);
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+    transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
+}
+
+.done-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px color-mix(in srgb, var(--primary) 40%, transparent);
+    filter: brightness(1.04);
 }

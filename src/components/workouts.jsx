@@ -184,7 +184,7 @@ export default function Workouts({ level, type1, setSelectedWorkouts, setPlanChe
                             if (prev[day].workouts.includes(workout)) {
                                 return prev
                             } else {
-                                return { ...prev, [day]: { workouts: [...prev[day].workouts, workout] } }
+                                return { ...prev, [day]: { type: [...prev[day].type, type1], workouts: [...prev[day].workouts, workout] } }
                             }
                         })
                     }}>
