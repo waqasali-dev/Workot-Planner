@@ -165,7 +165,7 @@ let workouts = [
     { id: 150, name: "Atlas Stone Lifts", reps: 5, sets: 3, category: "legs", level: "expert" }
 ];
 
-export default function Workouts({ level, type1, setSelectedWorkouts, planChecker, day }) {
+export default function Workouts({ level, type1, setSelectedWorkouts, setPlanChecker, planChecker, day }) {
     const filteredWorkouts = workouts.filter((workout) => workout.level === level && (workout.category === type1));
     return (
         <div className='workouts'>
@@ -175,15 +175,19 @@ export default function Workouts({ level, type1, setSelectedWorkouts, planChecke
                     <p>Reps: {workout.reps}</p>
                     <p>Sets: {workout.sets}</p>
                     <p>Category: {workout.category}</p>
-                    <button onClick={() => setSelectedWorkouts((prev) => {
-                        if (prev[day].workouts.includes(workout)) {
-                            return prev
-                        } else {
-                            planChecker[day] = true;
-                            return { ...prev, [day]: { workouts: [...prev[day].workouts, workout] } }
-                        }
-
-                    })}>
+                    <button onClick={() => {
+                        setPlanChecker((prev) => ({
+                            ...prev,
+                            [day]: true,
+                        }))
+                        setSelectedWorkouts((prev) => {
+                            if (prev[day].workouts.includes(workout)) {
+                                return prev
+                            } else {
+                                return { ...prev, [day]: { workouts: [...prev[day].workouts, workout] } }
+                            }
+                        })
+                    }}>
                         Add to Plan
                     </button>
                 </div>

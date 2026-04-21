@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Workouts from './workouts';
 import Exercisetype from './Exercisetype';
 import './Maininterface.css';
-
+import Sidebar from './Sidebar';
 
 function MainInterface() {
     const level = localStorage.getItem('level') || 'beginner';
@@ -40,7 +40,7 @@ function MainInterface() {
             workouts: [],
         },
     });
-    let planChecker = {
+    const [planChecker, setPlanChecker] = useState({
         monday: false,
         tuesday: false,
         wednesday: false,
@@ -48,12 +48,11 @@ function MainInterface() {
         friday: false,
         saturday: false,
         sunday: false,
-    }
+    });
     const exerciseTypes = ['abs', 'chest', 'back', 'legs', 'arms', 'shoulders', 'cardio'];
     return (
         <div className='main-interface'>
-            {/* this is prompt section, whatever written here is what the user wants now: 
-            */}
+            <Sidebar />
             <div className='plan-panel'>
                 <p className='day-selector'>
                     Day:
@@ -80,6 +79,10 @@ function MainInterface() {
                                         setDualMuscle(false);
                                         setType2('');
                                         if (planChecker[day]) {
+                                            setPlanChecker((prev) => ({
+                                                ...prev,
+                                                [day]: false,
+                                            }))
                                             setSelectedWorkouts((prev) => ({
                                                 ...prev,
                                                 [day]: {
@@ -143,7 +146,7 @@ function MainInterface() {
                     level={level}
                     type1={type1}
                     day={day}
-                    planChecker={planChecker[day]}
+                    setPlanChecker={setPlanChecker}
                     setSelectedWorkouts={setSelectedWorkouts}
                 />
                 {
@@ -152,7 +155,7 @@ function MainInterface() {
                             level={level}
                             type1={type2}
                             day={day}
-                            planChecker={planChecker[day]}
+                            setPlanChecker={setPlanChecker}
                             setSelectedWorkouts={setSelectedWorkouts}
                         />
                     )
