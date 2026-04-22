@@ -4,9 +4,8 @@ import MainInterface from './components/MainInterface';
 import { Routes, Route } from 'react-router-dom';
 import StartWorkout from './components/StartWorkout';
 import { WorkoutProvider } from './components/context/WorkoutContext';
+import Schedule from './components/Schedule';
 
-
-// now lets add navigation between levels and workouts
 
 function App() {
 
@@ -20,6 +19,7 @@ function App() {
           <Route path="/" element={<Levels />} />
           <Route path="/workout-plan" element={<MainInterface />} />
           <Route path="/start-workout" element={<StartWorkout />} />
+          <Route path="/schedule" element={<Schedule />} />
         </Routes>
       </WorkoutProvider>
     </div>
